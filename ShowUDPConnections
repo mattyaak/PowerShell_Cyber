@@ -1,0 +1,1 @@
+Get-NetUDPEndpoint | select-object creationtime,localaddress,localport,@{Label='ProcessName';Expression={(Get-Process -Id $_.OwningProcess).Name}}, @{Label="CommandLine";Expression={(Get-WmiObject Win32_Process -filter "ProcessID=$($_.OwningProcess)").commandline}} | ft -wrap -autosize
